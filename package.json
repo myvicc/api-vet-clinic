@@ -1,0 +1,33 @@
+{
+  "name": "api-vet-clinic",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myvicc/api-vet-clinic.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myvicc/api-vet-clinic/issues"
+  },
+  "homepage": "https://github.com/myvicc/api-vet-clinic#readme",
+  "dependencies": {
+    "@fastify/multipart": "^7.6.0",
+    "@fastify/swagger": "^8.5.1",
+    "@fastify/swagger-ui": "^1.8.1",
+    "fastify": "^4.17.0",
+    "mongoose": "^7.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.8"
+  }
+}
