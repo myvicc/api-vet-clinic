@@ -1,0 +1,30 @@
+name: Node.js CI
+
+on:
+  - push
+
+permissions:
+  contents: read
+  checks: write
+  id-token: write
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run prettier
+#      - run: npm run build
+#      - run: npm run test:coverage:junit
+#      - run: npm run lint:generate
+#      - name: Publish linter report
+#        uses: mikepenz/action-junit-report@v3
+#        if: success() || failure() # always run even if the previous step fails
+#        with:
+#          report_paths: '**/*junit.xml'
