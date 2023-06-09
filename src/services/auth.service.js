@@ -1,26 +1,14 @@
-import bcrypt from 'bcrypt';
-import { Doctor } from '../mongo.models/doctors.js';
-import { passwordIsCorrect } from '../utilities.js';
+import { compare } from 'bcrypt';
+import * as jwt from 'jsonwebtoken';
+const {
+  default: { sign },
+} = jwt;
 
-export async function signupDoctors(body) {
-  const existingDoctor = await Doctor.findOne({
-    email: body.email,
-  });
-  if (existingDoctor) {
-    throw new Error('Doctor with such email has already existed');
-  }
-  // if (!passwordIsCorrect(body.password)) {
-  //   console.log('body.password', body.password);
-  //   throw new Error('Password does not comply with the requirements');
-  // }
+const SECRET_WORD = 'secret';
+export const isPasswordsCompared = async (password, hashedPassword) => {
+  return compare(password, hashedPassword);
+};
 
-  const doctor = new Doctor({
-    firstName: body.firstName,
-    lastNane: body.lastNane,
-    email: body.email,
-    password: await bcrypt.hash(body.password, 10),
-  });
-  await doctor.save();
-  console.log('save to bd');
-  return doctor;
-}
+export const generateAccessToken = async (payload) => {
+  return sign(payload, SECRET_WORD, { expiresIn: '20m' });
+};

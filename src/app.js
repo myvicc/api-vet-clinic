@@ -2,8 +2,11 @@ import fastify from 'fastify';
 import fastifySwagger from '@fastify/swagger';
 import fastifyMultipart from '@fastify/multipart';
 import fastifySwaggerUi from '@fastify/swagger-ui';
-import { signupDoctors } from './services/auth.service.js';
-import { loginDoctor } from './services/login.service.js';
+import { doctorSchema } from './schemas/doctor.schema.js';
+import {
+  loginDoctorController,
+  registerDoctorController,
+} from './controllers/doctors.controller.js';
 
 export const application = fastify({
   logger: true,
@@ -22,6 +25,7 @@ application.register(fastifySwaggerUi, {
   routePrefix: '/docs',
 });
 
+application.addSchema(doctorSchema);
 application.register(
   (instance, opts, done) => {
     instance.post(
@@ -31,64 +35,30 @@ application.register(
           tags: ['doctors'],
           descriptions: ['create a doctor'],
           body: {
-            type: 'object',
-            properties: {
-              firstName: {
-                type: 'string',
-                minLength: 3,
-                maxLength: 25,
-              },
-              lastName: {
-                type: 'string',
-                minLength: 3,
-                maxLength: 25,
-              },
-              email: {
-                type: 'string',
-                minLength: 8,
-                maxLength: 40,
-                format: 'email',
-              },
-              password: {
-                type: 'string',
-                minLength: 8,
-                maxLength: 40,
-              },
-            },
+            $ref: 'doctor',
             required: ['firstName', 'lastName', 'email', 'password'],
           },
           response: {
-            200: {
+            201: {
               type: 'object',
               properties: {
-                _id: {
+                message: {
                   type: 'string',
                 },
-                firstName: {
+              },
+            },
+            400: {
+              type: 'object',
+              properties: {
+                message: {
                   type: 'string',
-                  minLength: 3,
-                  maxLength: 25,
-                },
-                lastName: {
-                  type: 'string',
-                  minLength: 3,
-                  maxLength: 25,
-                },
-                email: {
-                  type: 'string',
-                  minLength: 8,
-                  maxLength: 40,
-                  format: 'email',
                 },
               },
             },
           },
         },
       },
-      async (request, reply) => {
-        await signupDoctors(request.body);
-        reply.send('something)');
-      }
+      registerDoctorController
     );
     instance.post(
       '/login',
@@ -109,15 +79,26 @@ application.register(
             required: ['email', 'password'],
           },
           response: {
+            400: {
+              type: 'object',
+              properties: {
+                message: {
+                  type: 'string',
+                },
+              },
+            },
             200: {
-              type: 'string',
+              type: 'object',
+              properties: {
+                accessToken: {
+                  type: 'string',
+                },
+              },
             },
           },
         },
       },
-      async (request, reply) => {
-        await loginDoctor(request.body);
-      }
+      loginDoctorController
     );
     done();
   },
