@@ -70,10 +70,10 @@ application.register(
             type: 'object',
             properties: {
               email: {
-                type: 'string',
+                $ref: 'doctor#/properties/email',
               },
               password: {
-                type: 'string',
+                $ref: 'doctor#/properties/password',
               },
             },
             required: ['email', 'password'],

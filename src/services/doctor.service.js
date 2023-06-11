@@ -2,7 +2,7 @@ import { hash } from 'bcrypt';
 import { Doctor } from '../mongo.models/doctors.js';
 import { generateAccessToken, isPasswordsCompared } from './auth.service.js';
 
-export async function signupDoctors({ firstName, lastName, password, email }) {
+export async function signupDoctor({ firstName, lastName, password, email }) {
   const doctor = new Doctor({
     firstName,
     lastName,
@@ -13,7 +13,7 @@ export async function signupDoctors({ firstName, lastName, password, email }) {
   return doctor;
 }
 
-export async function isUserExist(email) {
+export async function isDoctorExist(email) {
   const doctor = await Doctor.findOne({ email });
   return !!doctor;
 }
@@ -23,7 +23,7 @@ export async function loginDoctor(email) {
   return generateAccessToken({ id: doctor._id });
 }
 
-export async function checkUserPassword(email, password) {
+export async function checkDoctorPassword(email, password) {
   const doctor = await Doctor.findOne({ email });
   return isPasswordsCompared(password, doctor.password);
 }
