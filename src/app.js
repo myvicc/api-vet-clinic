@@ -7,6 +7,11 @@ import {
   loginDoctorController,
   registerDoctorController,
 } from './controllers/doctors.controller.js';
+import { userSchema } from './schemas/user.schema.js';
+import {
+  loginUserController,
+  registerUsersController,
+} from './controllers/users.controller.js';
 
 export const application = fastify({
   logger: true,
@@ -26,6 +31,7 @@ application.register(fastifySwaggerUi, {
 });
 
 application.addSchema(doctorSchema);
+application.addSchema(userSchema);
 application.register(
   (instance, opts, done) => {
     instance.post(
@@ -99,6 +105,70 @@ application.register(
         },
       },
       loginDoctorController
+    );
+    instance.post(
+      '/user',
+      {
+        schema: {
+          tags: ['user'],
+          description: ['create a user'],
+          body: {
+            $ref: 'user',
+            required: ['firstName', 'lastName', 'email', 'password'],
+          },
+          response: {
+            201: {
+              type: 'object',
+              properties: {
+                message: {
+                  type: 'string',
+                },
+              },
+            },
+            400: {
+              type: 'object',
+              properties: {
+                message: {
+                  type: 'string',
+                },
+              },
+            },
+          },
+        },
+      },
+      registerUsersController
+    );
+    instance.post(
+      '/login-user',
+      {
+        schema: {
+          tags: ['user'],
+          description: ['login user'],
+          body: {
+            type: 'object',
+            properties: {
+              email: {
+                $ref: 'user#/properties/email',
+              },
+              password: {
+                $ref: 'user#/properties/password',
+              },
+            },
+            required: ['email', 'password'],
+          },
+          response: {
+            200: {
+              type: 'object',
+              properties: {
+                accessToken: {
+                  type: 'string',
+                },
+              },
+            },
+          },
+        },
+      },
+      loginUserController
     );
     done();
   },
