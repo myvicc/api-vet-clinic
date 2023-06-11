@@ -12,6 +12,7 @@ import {
   loginUserController,
   registerUsersController,
 } from './controllers/users.controller.js';
+import { schemas } from './schemas/index.js';
 
 export const application = fastify({
   logger: true,
@@ -30,8 +31,8 @@ application.register(fastifySwaggerUi, {
   routePrefix: '/docs',
 });
 
-application.addSchema(doctorSchema);
-application.addSchema(userSchema);
+application.addSchema(schemas);
+
 application.register(
   (instance, opts, done) => {
     instance.post(
