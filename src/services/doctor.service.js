@@ -27,3 +27,8 @@ export async function checkUserPassword(email, password) {
   const doctor = await Doctor.findOne({ email });
   return isPasswordsCompared(password, doctor.password);
 }
+
+export async function isTypeDoctor(id) {
+  const doctor = await Doctor.findOne({ id: id });
+  return !!doctor;
+}
