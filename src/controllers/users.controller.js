@@ -24,7 +24,7 @@ export const loginUserController = async (request, reply) => {
   }
   if (!(await checkUserPassword(email, password))) {
     reply.status(400);
-    return { message: '2User with such email does not exist' };
+    return { message: 'User with such email does not exist' };
   }
   reply.status(200);
   return { accessToken: await loginUser(email) };
