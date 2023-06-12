@@ -1,4 +1,4 @@
-import { User } from '../mongo.models/user.js';
+import { User } from '../mongo.models/users.js';
 import { hash } from 'bcrypt';
 import { generateAccessToken, isPasswordsCompared } from './auth.service.js';
 
@@ -20,10 +20,10 @@ export const isUserExist = async (email) => {
 
 export const checkUserPassword = async (email, password) => {
   const user = await User.findOne({ email });
-  await isPasswordsCompared(password, user.password);
+  return isPasswordsCompared(password, user.password);
 };
 
 export const loginUser = async (email) => {
   const user = await User.findOne({ email });
-  await generateAccessToken({ id: user._id });
+  return generateAccessToken({ id: user._id });
 };

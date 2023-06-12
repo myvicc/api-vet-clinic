@@ -2,12 +2,10 @@ import fastify from 'fastify';
 import fastifySwagger from '@fastify/swagger';
 import fastifyMultipart from '@fastify/multipart';
 import fastifySwaggerUi from '@fastify/swagger-ui';
-import { doctorSchema } from './schemas/doctor.schema.js';
 import {
   loginDoctorController,
   registerDoctorController,
 } from './controllers/doctors.controller.js';
-import { userSchema } from './schemas/user.schema.js';
 import {
   loginUserController,
   registerUsersController,
@@ -31,7 +29,9 @@ application.register(fastifySwaggerUi, {
   routePrefix: '/docs',
 });
 
-application.addSchema(schemas);
+schemas.forEach((schema) => {
+  application.addSchema(schema);
+});
 
 application.register(
   (instance, opts, done) => {
