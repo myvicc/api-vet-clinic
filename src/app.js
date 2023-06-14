@@ -11,6 +11,13 @@ import {
   registerUsersController,
 } from './controllers/users.controller.js';
 import { schemas } from './schemas/index.js';
+import {
+  createAnimalTypeController,
+  deleteAnimalTypeController,
+  getListOfAnimalTypeController,
+  getOneOfAnimalTypeController,
+  updateAnimalTypeController,
+} from './controllers/animalType.controller.js';
 
 export const application = fastify({
   logger: true,
@@ -170,6 +177,175 @@ application.register(
         },
       },
       loginUserController
+    );
+    instance.post(
+      '/animal-type',
+      {
+        schema: {
+          tags: ['animal-type'],
+          description: ['Create animal type'],
+          body: {
+            $ref: 'animalType',
+            required: ['typeOfAnimal'],
+          },
+          response: {
+            200: {
+              type: 'object',
+              properties: {
+                message: {
+                  type: 'string',
+                },
+              },
+            },
+            400: {
+              type: 'object',
+              properties: {
+                message: {
+                  type: 'string',
+                },
+              },
+            },
+          },
+        },
+      },
+      createAnimalTypeController
+    );
+    instance.put(
+      '/:animalTypeId',
+      {
+        schema: {
+          tags: ['Animal type'],
+          description: ['Update animal type'],
+          params: {
+            type: 'object',
+            properties: {
+              animalTypeId: {
+                type: 'string',
+              },
+            },
+            required: ['animalTypeId'],
+          },
+          body: {
+            $ref: 'animalType',
+          },
+          response: {
+            200: {
+              type: 'object',
+              properties: {
+                message: {
+                  type: 'string',
+                },
+              },
+            },
+            400: {
+              type: 'object',
+              properties: {
+                message: {
+                  type: 'string',
+                },
+              },
+            },
+          },
+        },
+      },
+      updateAnimalTypeController
+    );
+    instance.delete(
+      '/:animalTypeId',
+      {
+        schema: {
+          tags: ['Animal type'],
+          description: ['Delete animal type'],
+          params: {
+            type: 'object',
+            properties: {
+              animalTypeId: {
+                type: 'string',
+              },
+            },
+            required: ['animalTypeId'],
+          },
+          response: {
+            200: {
+              type: 'object',
+              properties: {
+                message: {
+                  type: 'string',
+                },
+              },
+            },
+            400: {
+              type: 'object',
+              properties: {
+                message: {
+                  type: 'string',
+                },
+              },
+            },
+          },
+        },
+      },
+      deleteAnimalTypeController
+    );
+    instance.get(
+      '/list-animal-type',
+      {
+        schema: {
+          tags: ['Animal type'],
+          description: ['List of animal type'],
+          response: {
+            200: {
+              type: 'array',
+              items: {
+                $ref: 'animalType',
+              },
+            },
+          },
+        },
+      },
+      getListOfAnimalTypeController
+    );
+    instance.get(
+      '/:animalTypeId',
+      {
+        schema: {
+          tags: ['Animal type'],
+          description: ['One animal type'],
+          params: {
+            type: 'object',
+            properties: {
+              animalTypeId: {
+                type: 'string',
+              },
+            },
+            required: ['animalTypeId'],
+          },
+          response: {
+            200: {
+              type: 'object',
+              properties: {
+                typeOfAnimal: {
+                  type: 'object',
+                  properties: {
+                    typeOfAnimal: {
+                      $ref: 'animalType#/properties/typeOfAnimal',
+                    },
+                  },
+                },
+              },
+            },
+            400: {
+              type: 'object',
+              properties: {
+                message: {
+                  type: 'string',
+                },
+              },
+            },
+          },
+        },
+      },
+      getOneOfAnimalTypeController
     );
     done();
   },
