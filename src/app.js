@@ -211,7 +211,7 @@ application.register(
       createAnimalTypeController
     );
     instance.put(
-      '/:animalTypeId',
+      '/animal-type/:animalTypeId',
       {
         schema: {
           tags: ['Animal type'],
@@ -251,7 +251,7 @@ application.register(
       updateAnimalTypeController
     );
     instance.delete(
-      '/:animalTypeId',
+      '/animal-type/:animalTypeId',
       {
         schema: {
           tags: ['Animal type'],
@@ -288,7 +288,7 @@ application.register(
       deleteAnimalTypeController
     );
     instance.get(
-      '/list-animal-type',
+      '/animal-type',
       {
         schema: {
           tags: ['Animal type'],
@@ -306,7 +306,7 @@ application.register(
       getListOfAnimalTypeController
     );
     instance.get(
-      '/:animalTypeId',
+      '/animal-type/:animalTypeId',
       {
         schema: {
           tags: ['Animal type'],
