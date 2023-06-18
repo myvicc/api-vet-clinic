@@ -1,6 +1,7 @@
 import { hash } from 'bcrypt';
 import { Doctor } from '../mongo.models/doctors.js';
 import { generateAccessToken, isPasswordsCompared } from './auth.service.js';
+import { User } from '../mongo.models/users.js';
 
 export async function signupDoctor({ firstName, lastName, password, email }) {
   const doctor = new Doctor({
@@ -27,3 +28,8 @@ export async function checkDoctorPassword(email, password) {
   const doctor = await Doctor.findOne({ email });
   return isPasswordsCompared(password, doctor.password);
 }
+
+export const getDoctorById = async (id) => {
+  const doctor = await User.findById(id);
+  return doctor;
+};

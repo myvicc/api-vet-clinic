@@ -18,6 +18,7 @@ import {
   getOneOfAnimalTypeController,
   updateAnimalTypeController,
 } from './controllers/animalType.controller.js';
+import authPlugin from './plugins/auth.js';
 
 export const application = fastify({
   logger: true,
@@ -40,6 +41,7 @@ schemas.forEach((schema) => {
   application.addSchema(schema);
 });
 
+application.register(authPlugin);
 application.register(
   (instance, opts, done) => {
     instance.post(
@@ -181,6 +183,9 @@ application.register(
     instance.post(
       '/animal-type',
       {
+        config: {
+          withAuth: true,
+        },
         schema: {
           tags: ['animal-type'],
           description: ['Create animal type'],
@@ -213,6 +218,9 @@ application.register(
     instance.put(
       '/animal-type/:animalTypeId',
       {
+        config: {
+          withAuth: true,
+        },
         schema: {
           tags: ['Animal type'],
           description: ['Update animal type'],
@@ -253,6 +261,9 @@ application.register(
     instance.delete(
       '/animal-type/:animalTypeId',
       {
+        config: {
+          withAuth: true,
+        },
         schema: {
           tags: ['Animal type'],
           description: ['Delete animal type'],
@@ -290,6 +301,9 @@ application.register(
     instance.get(
       '/animal-type',
       {
+        config: {
+          withAuth: true,
+        },
         schema: {
           tags: ['Animal type'],
           description: ['List of animal type'],
@@ -308,6 +322,9 @@ application.register(
     instance.get(
       '/animal-type/:animalTypeId',
       {
+        config: {
+          withAuth: true,
+        },
         schema: {
           tags: ['Animal type'],
           description: ['One animal type'],
