@@ -5,7 +5,7 @@ services:
     container_name: vet
     image: mongo
     environment:
-      MONGO_INITDB_ROOT_USERNAME: mongo.models
+      MONGO_INITDB_ROOT_USERNAME: mongo
       MONGO_INITDB_ROOT_PASSWORD: mypass
     ports:
-      - '27019:27017'
+      - '27017:27017'
