@@ -29,6 +29,7 @@ export const deleteAnimalType = async (animalTypeId) => {
 
 export const listOfAnimalType = async () => {
   const list = await AnimalType.find();
+  console.log(list);
   return list;
 };
 
