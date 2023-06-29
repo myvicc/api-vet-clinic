@@ -11,7 +11,7 @@ export const createAT = async (server, opts, done) => {
       },
       schema: {
         tags: ['animalType'],
-        description: ['Create animal type'],
+        description: 'Create animal type',
         body: {
           $ref: 'animalType',
           required: ['typeOfAnimal'],

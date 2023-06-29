@@ -8,7 +8,7 @@ export const registerDoctor = async (server, opts, done) => {
     {
       schema: {
         tags: ['doctors'],
-        descriptions: ['create a doctor'],
+        description: 'create a doctor',
         body: {
           $ref: 'doctor',
           required: ['firstName', 'lastName', 'email', 'password'],

@@ -1,4 +1,4 @@
-import { registerUsersController } from '../../controllers/users.controller.js';
+import { registerUsersController } from '../../controllers/users.controller.ts';
 import { isUserExistsGuard } from '../../guards/isUserExists.js';
 
 export const registerUser = async (server, opts, done) => {
@@ -9,7 +9,7 @@ export const registerUser = async (server, opts, done) => {
     {
       schema: {
         tags: ['user'],
-        description: ['create a user'],
+        description: 'Create a user',
         body: {
           $ref: 'user',
           required: ['firstName', 'lastName', 'email', 'password'],

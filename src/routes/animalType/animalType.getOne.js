@@ -11,7 +11,7 @@ export const getOneAT = async (server, opts, done) => {
       },
       schema: {
         tags: ['Animal type'],
-        description: ['One animal type'],
+        description: 'One animal type',
         params: {
           type: 'object',
           properties: {

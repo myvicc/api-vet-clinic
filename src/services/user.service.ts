@@ -2,7 +2,18 @@ import { User } from '../mongo.models/users.js';
 import { hash } from 'bcrypt';
 import { generateAccessToken, isPasswordsCompared } from './auth.service.js';
 
-export const signUpUser = async ({ lastName, firstName, email, password }) => {
+type User = {
+  lastName: string;
+  firstName: string;
+  email: string;
+  password: string;
+};
+export const signUpUser = async ({
+  lastName,
+  firstName,
+  email,
+  password,
+}: User) => {
   const user = new User({
     firstName,
     lastName,
@@ -13,7 +24,7 @@ export const signUpUser = async ({ lastName, firstName, email, password }) => {
   return user;
 };
 
-export const isUserExist = async (email) => {
+export const isUserExist = async (email: string) => {
   const user = await User.findOne({ email });
   return !!user;
 };

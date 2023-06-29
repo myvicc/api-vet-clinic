@@ -11,7 +11,7 @@ export const updateAT = async (server, opts, done) => {
       },
       schema: {
         tags: ['Animal type'],
-        description: ['Update animal type'],
+        description: 'Update animal type',
         params: {
           type: 'object',
           properties: {

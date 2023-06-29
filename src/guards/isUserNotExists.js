@@ -1,4 +1,4 @@
-import { isUserExist } from '../services/user.service.js';
+import { isUserExist } from '../services/user.service.ts';
 
 export const isUserNotExistsGuard = async (request, reply) => {
   if (!(await isUserExist(request.body.email))) {

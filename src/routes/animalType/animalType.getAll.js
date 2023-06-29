@@ -9,7 +9,7 @@ export const getAT = async (server, opts, done) => {
       },
       schema: {
         tags: ['Animal type'],
-        description: ['List of animal type'],
+        description: 'List of animal type',
         response: {
           200: {
             type: 'array',

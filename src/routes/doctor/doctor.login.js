@@ -10,7 +10,7 @@ export const loginDoctor = async (server, opts, done) => {
     {
       schema: {
         tags: ['doctors'],
-        descriptions: ['login a doctor'],
+        description: 'login a doctor',
         body: {
           type: 'object',
           properties: {

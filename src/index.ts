@@ -1,4 +1,4 @@
-import { application } from './app.js';
+import { application } from './app';
 import { connect } from './db.js';
 
 connect()

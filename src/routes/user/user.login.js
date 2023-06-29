@@ -1,4 +1,4 @@
-import { loginUserController } from '../../controllers/users.controller.js';
+import { loginUserController } from '../../controllers/users.controller.ts';
 import { checkUserPasswordGuard } from '../../guards/checkUserPassword.js';
 import { isUserNotExistsGuard } from '../../guards/isUserNotExists.js';
 
@@ -10,7 +10,7 @@ export const loginUser = async (server, opts, done) => {
     {
       schema: {
         tags: ['user'],
-        description: ['login user'],
+        description: 'login user',
         body: {
           type: 'object',
           properties: {

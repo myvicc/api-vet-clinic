@@ -11,7 +11,7 @@ export const deleteAT = async (server, opts, done) => {
       },
       schema: {
         tags: ['Animal type'],
-        description: ['Delete animal type'],
+        description: 'Delete animal type',
         params: {
           type: 'object',
           properties: {
