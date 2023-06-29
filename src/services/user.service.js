@@ -22,7 +22,6 @@ export const checkUserPassword = async (email, password) => {
   const user = await User.findOne({ email });
   return isPasswordsCompared(password, user.password);
 };
-
 export const loginUser = async (email) => {
   const user = await User.findOne({ email });
   return generateAccessToken({ id: user._id });
