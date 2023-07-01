@@ -1,4 +1,4 @@
-export type UserType = {
+export type DoctorType = {
   id: string;
   firstName: string;
   lastName: string;

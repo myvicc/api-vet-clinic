@@ -1,13 +1,9 @@
 import { RouteHandler } from 'fastify';
-import { loginUser, signUpUser } from '../services/user.service.js';
+import { loginUser, signUpUser } from '../services/user.service';
+import { UserType } from '../types/user.type';
 
 export const registerUsersController: RouteHandler<{
-  Body: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-  };
+  Body: Omit<UserType, 'id'>;
 }> = async (request, reply) => {
   const { firstName, lastName, email, password } = request.body;
   await signUpUser({ firstName, lastName, email, password });

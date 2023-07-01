@@ -1,5 +1,5 @@
-export const userSchema = {
-  $id: 'user',
+export const doctorSchema = {
+  $id: 'doctor',
   type: 'object',
   properties: {
     firstName: {

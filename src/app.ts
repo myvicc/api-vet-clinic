@@ -2,11 +2,11 @@ import fastify from 'fastify';
 import fastifySwagger from '@fastify/swagger';
 import fastifyMultipart from '@fastify/multipart';
 import fastifySwaggerUi from '@fastify/swagger-ui';
-import { schemas } from './schemas/index.js';
-import authPlugin from './plugins/auth.js';
-import { doctorRoutes } from './routes/doctor/doctor.index.js';
-import { userRoutes } from './routes/user/user.index.js';
-import { animalTypeRoutes } from './routes/animalType/animalType.index.js';
+import { schemas } from './schemas';
+import authPlugin from './plugins/auth';
+import { doctorRoutes } from './routes/doctor/doctor.index';
+import { userRoutes } from './routes/user/user.index';
+import { animalTypeRoutes } from './routes/animalType/animalType.index';
 
 export const application = fastify({
   logger: true,

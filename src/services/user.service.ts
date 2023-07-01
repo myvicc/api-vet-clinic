@@ -1,19 +1,14 @@
-import { User } from '../mongo.models/users.js';
+import { User } from '../mongo.models/users';
 import { hash } from 'bcrypt';
-import { generateAccessToken, isPasswordsCompared } from './auth.service.js';
+import { generateAccessToken, isPasswordsCompared } from './auth.service';
+import { UserType } from '../types/user.type';
 
-type User = {
-  lastName: string;
-  firstName: string;
-  email: string;
-  password: string;
-};
 export const signUpUser = async ({
   lastName,
   firstName,
   email,
   password,
-}: User) => {
+}: Omit<UserType, 'id'>) => {
   const user = new User({
     firstName,
     lastName,
@@ -29,11 +24,23 @@ export const isUserExist = async (email: string) => {
   return !!user;
 };
 
-export const checkUserPassword = async (email, password) => {
+export const checkUserPassword = async ({
+  email,
+  password,
+}: Pick<UserType, 'email' | 'password'>) => {
   const user = await User.findOne({ email });
-  return isPasswordsCompared(password, user.password);
+  if (!user) {
+    return 'Unknown error';
+  }
+  if (typeof user.password === 'string') {
+    return isPasswordsCompared(password, user.password);
+  }
+  return 'Unknown error';
 };
-export const loginUser = async (email) => {
+export const loginUser = async (email: string) => {
   const user = await User.findOne({ email });
+  if (!user) {
+    return 'Unknown error';
+  }
   return generateAccessToken({ id: user._id });
 };
