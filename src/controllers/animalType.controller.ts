@@ -50,5 +50,5 @@ export const getOneOfAnimalTypeController: RouteHandler<{
 }> = async (request, reply) => {
   const { id } = request.params;
   reply.status(200);
-  return { typeOfAnimal: await oneOfAnimalType(id) };
+  return await oneOfAnimalType(id);
 };

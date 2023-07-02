@@ -1,8 +1,8 @@
 import { compare } from 'bcrypt';
-import * as jwt from 'jsonwebtoken';
+import pkg from 'jsonwebtoken';
 import { verify } from 'jsonwebtoken';
 
-const { sign } = jwt;
+const { sign } = pkg;
 
 const SECRET_WORD = 'secret';
 export const isPasswordsCompared = async (

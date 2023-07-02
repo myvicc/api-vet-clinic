@@ -3,7 +3,7 @@ import { loginUser, signUpUser } from '../services/user.service';
 import { UserType } from '../types/user.type';
 
 export const registerUsersController: RouteHandler<{
-  Body: Omit<UserType, 'id'>;
+  Body: Pick<UserType, 'firstName' | 'lastName' | 'email' | 'password'>;
 }> = async (request, reply) => {
   const { firstName, lastName, email, password } = request.body;
   await signUpUser({ firstName, lastName, email, password });

@@ -38,7 +38,7 @@ export const listOfAnimalType = async () => {
   const list = await AnimalType.find();
   return list.map((animalType) => {
     return {
-      ...animalType,
+      type: animalType.type,
       id: animalType._id,
     };
   });

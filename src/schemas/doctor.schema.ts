@@ -24,7 +24,7 @@ export const doctorSchema = {
       maxLength: 40,
       pattern: '[^a-zA-Z0-9]',
     },
-    id: {
+    _id: {
       type: 'string',
     },
   },

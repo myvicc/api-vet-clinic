@@ -19,7 +19,15 @@ export const getAnimalTypeRoute: FastifyPluginCallback = async (
           200: {
             type: 'array',
             items: {
-              $ref: 'animalType',
+              type: 'object',
+              properties: {
+                type: {
+                  $ref: 'animalType#/properties/type',
+                },
+                id: {
+                  $ref: 'animalType#/properties/id',
+                },
+              },
             },
           },
         },

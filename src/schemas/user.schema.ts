@@ -24,7 +24,7 @@ export const userSchema = {
       maxLength: 40,
       pattern: '[^a-zA-Z0-9]',
     },
-    id: {
+    _id: {
       type: 'string',
     },
   },

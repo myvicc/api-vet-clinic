@@ -2,7 +2,10 @@ import fastifyPlugin from 'fastify-plugin';
 import { verifyAccessToken } from '../services/auth.service.js';
 import { getDoctorById } from '../services/doctor.service.js';
 import { FastifyPluginCallback, FastifyRequest } from 'fastify';
-import { JsonWebTokenError, JwtPayload } from 'jsonwebtoken';
+import { JwtPayload } from 'jsonwebtoken';
+import pkg from 'jsonwebtoken';
+
+const { JsonWebTokenError } = pkg;
 
 const authPlugin: FastifyPluginCallback = (instance, opts, done) => {
   instance.decorate('user', {});
@@ -32,7 +35,7 @@ const authPlugin: FastifyPluginCallback = (instance, opts, done) => {
             reply.status(401);
             reply.send({ message: 'Unauthorized', reason: err.message });
           }
-          reply.status(401);
+          reply.status(500);
           reply.send({ message: 'Unauthorized', reason: 'Unknown error' });
         }
       }

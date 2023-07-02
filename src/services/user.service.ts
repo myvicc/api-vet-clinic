@@ -8,7 +8,7 @@ export const signUpUser = async ({
   firstName,
   email,
   password,
-}: Omit<UserType, 'id'>) => {
+}: Pick<UserType, 'firstName' | 'lastName' | 'email' | 'password'>) => {
   const user = new User({
     firstName,
     lastName,
