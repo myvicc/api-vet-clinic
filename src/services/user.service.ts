@@ -1,7 +1,7 @@
 import { User } from '../mongo.models/users';
 import { hash } from 'bcrypt';
 import { generateAccessToken, isPasswordsCompared } from './auth.service';
-import { UserType } from '../types/user.type';
+import { UserType } from '../types/User.type';
 
 export const signUpUser = async ({
   lastName,
@@ -42,5 +42,10 @@ export const loginUser = async (email: string) => {
   if (!user) {
     return 'Unknown error';
   }
-  return generateAccessToken({ id: user._id });
+  return generateAccessToken({ id: user._id, userType: 'user' });
+};
+
+export const getUserById = async ({ id }: Pick<UserType, 'id'>) => {
+  const user = await User.findById(id);
+  return user;
 };

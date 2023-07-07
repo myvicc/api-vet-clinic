@@ -1,6 +1,6 @@
 import { checkDoctorPassword } from '../../../services/doctor.service';
 import { RouteHandler } from 'fastify';
-import { UserType } from '../../../types/user.type';
+import { UserType } from '../../../types/User.type';
 
 export const checkDoctorPasswordGuard: RouteHandler<{
   Body: Pick<UserType, 'email' | 'password'>;

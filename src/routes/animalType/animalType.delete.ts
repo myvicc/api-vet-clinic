@@ -1,18 +1,24 @@
 import { deleteAnimalTypeController } from '../../controllers/animalType.controller';
 import { isAnimalTypeNotExistByIdGuard } from './guards/isAnimalTypeNotExistById';
 import { FastifyPluginCallback } from 'fastify';
+import { AnimalTypeType } from '../../types/AnimalType.type';
 
 export const deleteAnimalTypeRoute: FastifyPluginCallback = async (
   server,
   opts,
   done
 ) => {
-  server.addHook('preHandler', isAnimalTypeNotExistByIdGuard);
-  server.delete(
+  server.addHook<{
+    Params: Pick<AnimalTypeType, 'id'>;
+  }>('preHandler', isAnimalTypeNotExistByIdGuard);
+  server.delete<{
+    Params: Pick<AnimalTypeType, 'id'>;
+  }>(
     '',
     {
       config: {
         withAuth: true,
+        permission: ['doctor'],
       },
       schema: {
         tags: ['Animal type'],

@@ -1,5 +1,6 @@
 import { application } from './app';
 import { connect } from './db';
+import './types/fastify';
 
 connect()
   .then(() => {

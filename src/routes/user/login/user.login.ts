@@ -2,15 +2,22 @@ import { loginUserController } from '../../../controllers/users.controller';
 import { checkUserPasswordGuard } from './checkUserPasswordGuard';
 import { isUserNotExistsGuard } from './isUserNotExistsGuard';
 import { FastifyPluginCallback } from 'fastify';
+import { UserType } from '../../../types/User.type';
 
 export const loginUserRoute: FastifyPluginCallback = async (
   server,
   opts,
   done
 ) => {
-  server.addHook('preHandler', isUserNotExistsGuard);
-  server.addHook('preHandler', checkUserPasswordGuard);
-  server.post(
+  server.addHook<{
+    Body: Pick<UserType, 'email'>;
+  }>('preHandler', isUserNotExistsGuard);
+  server.addHook<{
+    Body: Pick<UserType, 'email' | 'password'>;
+  }>('preHandler', checkUserPasswordGuard);
+  server.post<{
+    Body: { email: string };
+  }>(
     '',
     {
       schema: {

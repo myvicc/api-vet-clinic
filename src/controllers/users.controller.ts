@@ -1,6 +1,6 @@
 import { RouteHandler } from 'fastify';
 import { loginUser, signUpUser } from '../services/user.service';
-import { UserType } from '../types/user.type';
+import { UserType } from '../types/User.type';
 
 export const registerUsersController: RouteHandler<{
   Body: Pick<UserType, 'firstName' | 'lastName' | 'email' | 'password'>;

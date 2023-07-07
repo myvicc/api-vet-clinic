@@ -1,6 +1,6 @@
 import { isDoctorExist } from '../../../services/doctor.service';
 import { RouteHandler } from 'fastify';
-import { UserType } from '../../../types/user.type';
+import { UserType } from '../../../types/User.type';
 
 export const isDoctorExistsGuard: RouteHandler<{
   Body: Pick<UserType, 'email'>;

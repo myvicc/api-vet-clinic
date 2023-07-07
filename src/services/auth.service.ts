@@ -1,5 +1,5 @@
 import { compare } from 'bcrypt';
-import pkg from 'jsonwebtoken';
+import pkg, { JwtPayload } from 'jsonwebtoken';
 import { verify } from 'jsonwebtoken';
 
 const { sign } = pkg;
@@ -12,13 +12,10 @@ export const isPasswordsCompared = async (
   return compare(password, hashedPassword);
 };
 
-type JwtPayload = {
-  id: string | Object;
-};
 export const generateAccessToken = async (payload: JwtPayload) => {
   return sign(payload, SECRET_WORD, { expiresIn: '20m' });
 };
 
-export const verifyAccessToken = async (token: string) => {
+export const verifyAccessToken = (token: string): JwtPayload | string => {
   return verify(token, SECRET_WORD);
 };

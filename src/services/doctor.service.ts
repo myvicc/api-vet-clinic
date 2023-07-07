@@ -1,8 +1,8 @@
 import { hash } from 'bcrypt';
 import { Doctor } from '../mongo.models/doctors';
 import { generateAccessToken, isPasswordsCompared } from './auth.service';
-import { User } from '../mongo.models/users';
 import { DoctorType } from '../types/doctor.type';
+import { User } from '../mongo.models/users';
 
 export async function signupDoctor({
   firstName,
@@ -30,7 +30,7 @@ export async function loginDoctor(email: DoctorType['email']) {
   if (!doctor) {
     return false;
   }
-  return generateAccessToken({ id: doctor._id });
+  return generateAccessToken({ id: doctor._id, userType: 'doctor' });
 }
 
 export async function checkDoctorPassword({
@@ -47,7 +47,7 @@ export async function checkDoctorPassword({
   return 'Unknown error';
 }
 
-export const getDoctorById = async (id: Pick<DoctorType, 'id'>) => {
-  const doctor = await User.findById(id);
+export const getDoctorById = async ({ id }: Pick<DoctorType, 'id'>) => {
+  const doctor = await Doctor.findById(id);
   return doctor;
 };

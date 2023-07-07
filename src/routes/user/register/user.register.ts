@@ -1,14 +1,19 @@
 import { registerUsersController } from '../../../controllers/users.controller';
 import { isUserExistsGuard } from './isUserExistsGuard.js';
 import { FastifyPluginCallback } from 'fastify';
+import { UserType } from '../../../types/User.type';
 
 export const registerUserRoute: FastifyPluginCallback = async (
   server,
   opts,
   done
 ) => {
-  server.addHook('preHandler', isUserExistsGuard);
-  server.post(
+  server.addHook<{
+    Body: Pick<UserType, 'email'>;
+  }>('preHandler', isUserExistsGuard);
+  server.post<{
+    Body: Pick<UserType, 'firstName' | 'lastName' | 'email' | 'password'>;
+  }>(
     '',
     {
       schema: {

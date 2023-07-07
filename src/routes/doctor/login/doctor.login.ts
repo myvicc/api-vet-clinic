@@ -2,15 +2,23 @@ import { loginDoctorController } from '../../../controllers/doctors.controller';
 import { checkDoctorPasswordGuard } from './checkDoctorPasswordGuard';
 import { isDoctorNotExistsGuard } from './isDoctorNotExistsGuard';
 import { FastifyPluginCallback } from 'fastify';
+import { UserType } from '../../../types/User.type';
+import { DoctorType } from '../../../types/doctor.type';
 
 export const loginDoctorRoute: FastifyPluginCallback = async (
   server,
   opts,
   done
 ) => {
-  server.addHook('preHandler', isDoctorNotExistsGuard);
-  server.addHook('preHandler', checkDoctorPasswordGuard);
-  server.post(
+  server.addHook<{
+    Body: Pick<UserType, 'email'>;
+  }>('preHandler', isDoctorNotExistsGuard);
+  server.addHook<{
+    Body: Pick<UserType, 'email' | 'password'>;
+  }>('preHandler', checkDoctorPasswordGuard);
+  server.post<{
+    Body: Pick<DoctorType, 'email'>;
+  }>(
     '',
     {
       schema: {

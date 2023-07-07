@@ -1,18 +1,25 @@
 import { updateAnimalTypeController } from '../../controllers/animalType.controller';
 import { isAnimalTypeNotExistByIdGuard } from './guards/isAnimalTypeNotExistById';
 import { FastifyPluginCallback } from 'fastify';
+import { AnimalTypeType } from '../../types/AnimalType.type';
 
 export const updateAnimalTypeRoute: FastifyPluginCallback = async (
   server,
   opts,
   done
 ) => {
-  server.addHook('preHandler', isAnimalTypeNotExistByIdGuard);
-  server.put(
+  server.addHook<{
+    Params: Pick<AnimalTypeType, 'id'>;
+  }>('preHandler', isAnimalTypeNotExistByIdGuard);
+  server.put<{
+    Body: Pick<AnimalTypeType, 'type'>;
+    Params: Pick<AnimalTypeType, 'id'>;
+  }>(
     '',
     {
       config: {
         withAuth: true,
+        permission: ['doctor'],
       },
       schema: {
         tags: ['Animal type'],
