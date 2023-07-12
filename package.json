@@ -6,9 +6,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js",
+    "start": "nodemon --exec ts-node src/index.ts",
     "start:mongo": "docker-compose up -d mongo",
-    "prettier": "prettier --check \"src/**/*.js\""
+    "prettier": "prettier --check \"src/**/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "@fastify/multipart": "^7.6.0",
     "@fastify/swagger": "^8.5.1",
     "@fastify/swagger-ui": "^1.8.1",
+    "@types/jsonwebtoken": "^9.0.2",
     "bcrypt": "^5.1.0",
     "fastify": "^4.17.0",
     "fastify-plugin": "^4.5.0",
@@ -32,8 +33,12 @@
     "mongoose": "^7.2.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/node": "^20.3.2",
     "nodemon": "^2.0.22",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.5"
   },
   "prettier": {
     "singleQuote": true
