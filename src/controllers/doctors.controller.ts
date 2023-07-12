@@ -1,6 +1,6 @@
 import { loginDoctor, signupDoctor } from '../services/doctor.service';
 import { RouteHandler } from 'fastify';
-import { DoctorType } from '../types/doctor.type';
+import { DoctorType } from '../types/Doctor.type';
 
 export const registerDoctorController: RouteHandler<{
   Body: Omit<DoctorType, 'id'>;

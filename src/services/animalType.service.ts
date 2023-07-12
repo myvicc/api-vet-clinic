@@ -1,4 +1,4 @@
-import { AnimalType } from '../mongo.models/AnimalType';
+import { AnimalType } from '../mongo.models/animalType';
 import { AnimalTypeType } from '../types/AnimalType.type';
 
 export const createAnimalType = async (type: string) => {
