@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { DoctorType } from '../types/doctor.type';
+import { DoctorType } from '../types/Doctor.type';
 
 const doctorsSchema = new Schema<Omit<DoctorType, 'id'>>({
   firstName: String,

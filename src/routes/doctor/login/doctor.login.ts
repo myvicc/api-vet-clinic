@@ -3,7 +3,7 @@ import { checkDoctorPasswordGuard } from './checkDoctorPasswordGuard';
 import { isDoctorNotExistsGuard } from './isDoctorNotExistsGuard';
 import { FastifyPluginCallback } from 'fastify';
 import { UserType } from '../../../types/User.type';
-import { DoctorType } from '../../../types/doctor.type';
+import { DoctorType } from '../../../types/Doctor.type';
 
 export const loginDoctorRoute: FastifyPluginCallback = async (
   server,

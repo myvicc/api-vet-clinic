@@ -1,5 +1,5 @@
 import { HTTPMethods } from 'fastify';
-import { DoctorType } from './doctor.type';
+import { DoctorType } from './Doctor.type';
 import { UserType } from './User.type';
 import { Permission } from './Permission';
 

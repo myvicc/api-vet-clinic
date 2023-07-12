@@ -2,7 +2,7 @@ import { registerDoctorController } from '../../../controllers/doctors.controlle
 import { isDoctorExistsGuard } from './isDoctorExistsGuard';
 import { FastifyPluginCallback } from 'fastify';
 import { UserType } from '../../../types/User.type';
-import { DoctorType } from '../../../types/doctor.type';
+import { DoctorType } from '../../../types/Doctor.type';
 
 export const registerDoctorRoute: FastifyPluginCallback = async (
   server,
