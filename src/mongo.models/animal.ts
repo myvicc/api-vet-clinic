@@ -5,7 +5,7 @@ const animalSchema = new Schema<Omit<AnimalType, 'id'>>({
   name: String,
   age: Number,
   breed: String,
-  animalType: Schema.Types.ObjectId,
+  animalTypeId: Schema.Types.ObjectId,
   ownerId: Schema.Types.ObjectId,
 });
 

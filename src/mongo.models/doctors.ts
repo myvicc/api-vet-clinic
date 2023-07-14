@@ -8,4 +8,4 @@ const doctorsSchema = new Schema<Omit<DoctorType, 'id'>>({
   password: String,
 });
 
-export const Doctor = model<Omit<DoctorType, 'id'>>('doctors', doctorsSchema);
+export const Doctor = model<DoctorType>('doctors', doctorsSchema);

@@ -1,6 +1,6 @@
 import fastifyPlugin from 'fastify-plugin';
-import { verifyAccessToken } from '../services/auth.service.js';
-import { getDoctorById } from '../services/doctor.service.js';
+import { verifyAccessToken } from '../services/auth.service';
+import { getDoctorById } from '../services/doctor.service';
 import { FastifyPluginCallback, FastifyRequest } from 'fastify';
 import pkg from 'jsonwebtoken';
 import { getUserById } from '../services/user.service';
@@ -41,6 +41,7 @@ const authPlugin: FastifyPluginCallback = (instance, opts, done) => {
               user = await getUserById({ id: payload.id });
             }
             if (user) {
+              // @ts-ignore
               request.user = user;
             }
             if (!permission.includes(payload.userType)) {

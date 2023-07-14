@@ -1,19 +1,18 @@
-import { createAnimalController } from '../../controllers/animal.controller';
 import { FastifyPluginCallback } from 'fastify';
-import { isAnimalExistGuard } from './guards/isAnimalExist';
+import { deleteAnimalController } from '../../controllers/animal.controller';
+import { isAnimalNotExistByIdGuard } from './guards/isAnimalNotExistById';
 import { AnimalType } from '../../types/Animal.type';
 
-export const createAnimalRoute: FastifyPluginCallback = async (
+export const deleteAnimalRoute: FastifyPluginCallback = async (
   server,
   opts,
   done
 ) => {
-  server.addHook<{
-    Body: Pick<AnimalType, 'name'>;
-  }>('preHandler', isAnimalExistGuard);
-  server.post<{
-    Body: Omit<AnimalType, 'id' | 'ownerId'>;
-  }>(
+  server.addHook<{ Params: Pick<AnimalType, 'id'> }>(
+    'preHandler',
+    isAnimalNotExistByIdGuard
+  );
+  server.delete<{ Params: Pick<AnimalType, 'id'> }>(
     '',
     {
       config: {
@@ -22,10 +21,15 @@ export const createAnimalRoute: FastifyPluginCallback = async (
       },
       schema: {
         tags: ['Animal'],
-        description: 'Create animal',
-        body: {
-          $ref: 'animal',
-          required: ['name'],
+        description: 'Delete animal',
+        params: {
+          type: 'object',
+          properties: {
+            id: {
+              $ref: 'animal#/properties/id',
+            },
+          },
+          required: ['id'],
         },
         response: {
           200: {
@@ -47,7 +51,7 @@ export const createAnimalRoute: FastifyPluginCallback = async (
         },
       },
     },
-    createAnimalController
+    deleteAnimalController
   );
   done();
 };

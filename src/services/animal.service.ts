@@ -1,24 +1,40 @@
 import { Animal } from '../mongo.models/animal';
 import { AnimalType } from '../types/Animal.type';
 
-export const createAnimal = async ({ name, age, breed, animalType }) => {
+export const createAnimal = async ({
+  name,
+  age,
+  breed,
+  animalTypeId,
+  ownerId,
+}: Omit<AnimalType, 'id'>) => {
   const animal = new Animal({
     name,
     age,
     breed,
-    animalType
+    animalTypeId,
+    ownerId,
   });
   await animal.save();
+  console.log(animal);
   return animal;
 };
 
-export const isAnimalExist = async (name: string) => {
-  const animal = await Animal.findOne({ name });
+export const isAnimalExist = async ({
+  name,
+  ownerId,
+}: Pick<AnimalType, 'name' | 'ownerId'>) => {
+  const animal = await Animal.findOne({ name, ownerId });
   return !!animal;
 };
-export const isAnimalExistById = async (id: string) => {
+export const isAnimalExistById = async ({
+  id,
+  ownerId,
+}: Pick<AnimalType, 'id' | 'ownerId'>) => {
   const animal = await Animal.findById(id);
-  return !!animal;
+  if (animal && animal.ownerId.toString() === ownerId) {
+    return !!animal;
+  }
 };
 
 export const updateAnimal = async ({
@@ -26,17 +42,18 @@ export const updateAnimal = async ({
   name,
   age,
   breed,
-  animalType,
-}: Omit<AnimalType, 'owner'>) => {
+  animalTypeId,
+}: Omit<AnimalType, 'ownerId'>) => {
   const animal = await Animal.findById(id);
   if (animal) {
     animal.name = name;
     animal.age = age;
     animal.breed = breed;
-    animal.animalType = animalType;
+    animal.animalTypeId = animalTypeId;
     await animal.save();
+    console.log('animal', animal);
   }
-  return 'Animal does not exist';
+  return 'Unknown error';
 };
 
 export const deleteAnimal = async (id: string) => {
@@ -51,8 +68,8 @@ export const listOfAnimal = async () => {
       name: animal.name,
       age: animal.age,
       breed: animal.breed,
-      animalType: animal.animalType,
-      owner.id: animal.ownerId,
+      animalTypeId: animal.animalTypeId,
+      ownerId: animal.ownerId,
     };
   });
 };

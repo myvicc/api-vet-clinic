@@ -25,7 +25,7 @@ export const animalSchema = {
     ownerId: {
       type: 'string',
     },
-    _id: {
+    id: {
       type: 'string',
     },
   },
