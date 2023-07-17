@@ -3,6 +3,6 @@ export type AnimalType = {
   name: string;
   age: number;
   breed: string;
-  animalTypeId: string;
-  ownerId: string;
+  animalTypeId: string | object;
+  ownerId: string | object;
 };

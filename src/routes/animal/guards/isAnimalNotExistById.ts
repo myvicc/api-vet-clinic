@@ -7,7 +7,6 @@ export const isAnimalNotExistByIdGuard: RouteHandler<{
 }> = async (request, reply) => {
   if (request.user) {
     const owner = request.user;
-
     if (
       !(await isAnimalExistById({ id: request.params.id, ownerId: owner.id }))
     ) {

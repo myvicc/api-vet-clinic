@@ -30,7 +30,8 @@
     "fastify": "^4.17.0",
     "fastify-plugin": "^4.5.0",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.2.2"
+    "mongoose": "^7.2.2",
+    "mongoose-types": "^1.0.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

@@ -1,6 +1,8 @@
 import {
   createAnimal,
   deleteAnimal,
+  getOneOwnAnimal,
+  listOfAnimal,
   updateAnimal,
 } from '../services/animal.service';
 import { RouteHandler } from 'fastify';
@@ -10,9 +12,7 @@ export const createAnimalController: RouteHandler<{
   Body: Omit<AnimalType, 'id' | 'ownerId'>;
 }> = async (request, reply) => {
   const { name, age, breed, animalTypeId } = request.body;
-
   const owner = request.user;
-
   if (request.user && owner) {
     await createAnimal({ name, age, breed, animalTypeId, ownerId: owner.id });
     reply.status(201);
@@ -38,4 +38,23 @@ export const deleteAnimalController: RouteHandler<{
   await deleteAnimal(id);
   reply.status(200);
   return { message: 'Animal was deleted' };
+};
+
+export const getListOfOwnAnimalController: RouteHandler = async (
+  request,
+  reply
+) => {
+  const owner = request.user;
+  if (owner) {
+    reply.status(200);
+    return await listOfAnimal({ ownerId: owner.id });
+  }
+};
+
+export const getOneAnimalController: RouteHandler<{
+  Params: Pick<AnimalType, 'id'>;
+}> = async (request, reply) => {
+  const { id } = request.params;
+  reply.status(200);
+  return await getOneOwnAnimal({ id });
 };

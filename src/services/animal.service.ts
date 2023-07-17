@@ -16,7 +16,6 @@ export const createAnimal = async ({
     ownerId,
   });
   await animal.save();
-  console.log(animal);
   return animal;
 };
 
@@ -50,8 +49,7 @@ export const updateAnimal = async ({
     animal.age = age;
     animal.breed = breed;
     animal.animalTypeId = animalTypeId;
-    await animal.save();
-    console.log('animal', animal);
+    return await animal.save();
   }
   return 'Unknown error';
 };
@@ -60,8 +58,8 @@ export const deleteAnimal = async (id: string) => {
   await Animal.findByIdAndDelete(id);
 };
 
-export const listOfAnimal = async () => {
-  const list = await Animal.find();
+export const listOfAnimal = async (ownerId: Pick<AnimalType, 'ownerId'>) => {
+  const list = await Animal.find(ownerId);
   return list.map((animal) => {
     return {
       id: animal._id,
@@ -74,6 +72,6 @@ export const listOfAnimal = async () => {
   });
 };
 
-export const oneOfAnimal = async (id: string) => {
+export const getOneOwnAnimal = async ({ id }: Pick<AnimalType, 'id'>) => {
   return Animal.findById(id);
 };
