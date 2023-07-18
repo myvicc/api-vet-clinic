@@ -18,7 +18,7 @@ export const getOneAnimalTypeRoute: FastifyPluginCallback = async (
     {
       config: {
         withAuth: true,
-        permission: ['doctor'],
+        permission: ['doctor', 'user'],
       },
       schema: {
         tags: ['Animal type'],

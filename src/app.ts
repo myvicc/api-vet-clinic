@@ -7,6 +7,7 @@ import authPlugin from './plugins/auth';
 import { doctorRoutes } from './routes/doctor/doctor.index';
 import { userRoutes } from './routes/user/user.index';
 import { animalTypeRoutes } from './routes/animalType/animalType.index';
+import { animalRoutes } from './routes/animal/animal.index';
 
 export const application = fastify({
   logger: true,
@@ -35,6 +36,7 @@ application.register(
     instance.register(doctorRoutes, { prefix: '/doctor' });
     instance.register(userRoutes, { prefix: '/user' });
     instance.register(animalTypeRoutes, { prefix: '/animalType' });
+    instance.register(animalRoutes, { prefix: '/animal' });
     done();
   },
   {

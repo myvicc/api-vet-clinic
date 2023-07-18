@@ -1,12 +1,12 @@
 import { HTTPMethods } from 'fastify';
-import { DoctorType } from './doctor.type';
+import { DoctorType } from './Doctor.type';
 import { UserType } from './User.type';
 import { Permission } from './Permission';
 
 declare module 'fastify' {
   interface FastifyRequest {
-    user?: Omit<DoctorType, 'id'> | Omit<UserType, 'id'>;
-    permission?: [Omit<DoctorType, 'id'> | Omit<UserType, 'id'>]; //?
+    user?: DoctorType | UserType;
+    permission?: [Omit<DoctorType, 'id'> | Omit<UserType, 'id'>]; //? Omit<DoctorType, 'id'>[] | Omit<UserType, 'id'>[];
   }
 
   interface FastifyContextConfig {

@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { DoctorType } from '../types/doctor.type';
+import { DoctorType } from '../types/Doctor.type';
 
 const doctorsSchema = new Schema<Omit<DoctorType, 'id'>>({
   firstName: String,
@@ -8,4 +8,4 @@ const doctorsSchema = new Schema<Omit<DoctorType, 'id'>>({
   password: String,
 });
 
-export const Doctor = model<Omit<DoctorType, 'id'>>('doctors', doctorsSchema);
+export const Doctor = model<DoctorType>('doctors', doctorsSchema);

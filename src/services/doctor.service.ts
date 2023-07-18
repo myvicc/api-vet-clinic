@@ -1,8 +1,7 @@
 import { hash } from 'bcrypt';
 import { Doctor } from '../mongo.models/doctors';
 import { generateAccessToken, isPasswordsCompared } from './auth.service';
-import { DoctorType } from '../types/doctor.type';
-import { User } from '../mongo.models/users';
+import { DoctorType } from '../types/Doctor.type';
 
 export async function signupDoctor({
   firstName,
